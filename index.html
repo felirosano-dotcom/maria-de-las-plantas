@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>María de las Plantas - Diseño y Mantenimiento de Jardines</title>
+      <style>
+                * { margin: 0; padding: 0; box-sizing: border-box; }
+                :root { --primary-color: #2d7c3f; --secondary-color: #f4a261; --text-color: #333; --bg-light: #f9f9f9; }
+                body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-color); background-color: #fff; }
+                .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+                .header { background-color: var(--primary-color); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+                .header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+                .logo { font-size: 1.5rem; font-weight: bold; }
+                .nav { display: flex; gap: 2rem; flex-wrap: wrap; }
+                .nav a { color: white; text-decoration: none; transition: opacity 0.3s; }
+                .nav a:hover { opacity: 0.8; }
+                .carrito-btn { background-color: var(--secondary-color); color: #333; padding: 0.5rem 1rem; border-radius: 20px; font-weight: bold; cursor: pointer; border: none; }
+
+                .hero { background: linear-gradient(135deg, var(--primary-color), #4a9d5f); color: white; padding: 6rem 0; display: flex; align-items: center; }
+                .hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+                .hero-content h1 { font-size: 3rem; margin-bottom: 1rem; }
+                .hero-content p { font-size: 1.5rem; margin-bottom: 0.5rem; }
+                .hero-content .subtitle { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; }
+                .hero-image { background-color: rgba(255,255,255,0.1); padding: 4rem; border-radius: 10px; text-align: center; }
+                .image-placeholder { font-size: 5rem; opacity: 0.8; }
+
+                .cta-btn { background-color: var(--secondary-color); color: #333; padding: 1rem 2rem; border: none; border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background-color 0.3s; }
+                .cta-btn:hover { background-color: #e89a3d; }
+
+                .trabajos { padding: 4rem 0; background-color: var(--bg-light); }
+                .trabajos h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: var(--primary-color); }
+                .galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+                .trabajo-card { background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
+                .trabajo-card:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0,0,0,0.15); }
+                .trabajo-image { font-size: 4rem; text-align: center; margin-bottom: 1rem; }
+                .trabajo-card h3 { color: var(--primary-color); margin-bottom: 0.5rem; }
+
+                .servicios { padding: 4rem 0; }
+                .servicios h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: var(--primary-color); }
+                .filtros { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+                .filtro-btn { padding: 0.5rem 1.5rem; border: 2px solid var(--primary-color); background: white; color: var(--primary-color); border-radius: 20px; cursor: pointer; transition: all 0.3s; font-weight: bold; }
+                .filtro-btn.activo, .filtro-btn:hover { background-color: var(--primary-color); color: white; }
+                .productos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+                .producto-card { background: white; border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: transform 0.3s; }
+                .producto-card:hover { transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0,0,0,0.15); }
+                .producto-imagen { font-size: 4rem; text-align: center; padding: 2rem; background-color: var(--bg-light); }
+                .producto-info { padding: 1.5rem; }
+                .producto-card h3 { color: var(--primary-color); margin-bottom: 0.5rem; }
+                .producto-card p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+                .producto-precio { font-size: 1.5rem; font-weight: bold; color: var(--secondary-color); margin-bottom: 1rem; }
+                .btn-agregar { width: 100%; background-color: var(--primary-color); color: white; padding: 0.7rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: background-color 0.3s; }
+                .btn-agregar:hover { background-color: #1f5a2b; }
+
+                .equipo { padding: 4rem 0; background-color: var(--bg-light); }
+                .equipo h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: var(--primary-color); }
+                .equipo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+                .miembro-card { background: white; padding: 2rem; border-radius: 10px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                .avatar { font-size: 4rem; margin-bottom: 1rem; }
+                .miembro-card h3 { color: var(--primary-color); margin-bottom: 0.5rem; }
+
+                .testimonios { padding: 4rem 0; background-color: var(--bg-light); }
+                .testimonios h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: var(--primary-color); }
+                .testimonios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+                .testimonio-card { background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--secondary-color); }
+                .testimonio-card .texto { font-style: italic; margin-bottom: 1rem; color: #555; }
+                .testimonio-card .autor { font-weight: bold; color: var(--primary-color); }
+                .rating { margin-top: 0.5rem; font-size: 1.2rem; }
+
+                .reservas { padding: 4rem 0; }
+                .reservas h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: var(--primary-color); }
+                .reserva-form { max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+                .input { padding: 0.8rem; border: 1px solid #e0e0e0; border-radius: 5px; font-size: 1rem; font-family: inherit; }
+                .input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 5px rgba(45, 124, 63, 0.3); }
+                .nota { text-align: center; color: #666; font-size: 0.9rem; margin-top: 1rem; }
+                .turno-confirmado { background-color: #d4edda; color: #155724; padding: 1rem; border-radius: 5px; text-align: center; margin-top: 1rem; }
+
+                .carrito-section { padding: 4rem 0; background-color: var(--bg-light); }
+                .carrito-section h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: var(--primary-color); }
+                #carrito-items { background: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                .carrito-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #e0e0e0; }
+                .btn-eliminar { background-color: #dc3545; color: white; padding: 0.3rem 0.6rem; border: none; border-radius: 3px; cursor: pointer; }
+                .carrito-total { background: white; padding: 2rem; border-radius: 10px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+                .carrito-total h3 { margin-bottom: 1rem; color: var(--primary-color); }
+                .btn-secundario { background-color: #6c757d; color: white; padding: 0.7rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; margin-top: 1rem; }
+
+                .contacto { padding: 4rem 0; background-color: var(--bg-light); }
+                .contacto h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: var(--primary-color); }
+                .contacto-info { text-align: center; margin-bottom: 2rem; font-size: 1.1rem; }
+                .contacto-info p { margin-bottom: 0.5rem; }
+                .contacto-info a { color: var(--primary-color); text-decoration: none; }
+                .contacto-form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+                .contacto-form textarea { resize: vertical; min-height: 150px; }
+
+                .footer { background-color: var(--primary-color); color: white; padding: 2rem 0; text-align: center; }
+                .footer p { margin: 0.5rem 0; }
+
+                @media (max-width: 768px) {
+                              .hero .container { grid-template-columns: 1fr; }
+                              .hero-content h1 { font-size: 2rem; }
+                              .productos-grid { grid-template-columns: 1fr; }
+                }
+            </style>
+  </head>
+  <body>
+        <header class="header">
+                  <div class="container">
+                                <div class="logo">🌿 María de las Plantas</div>div>
+                                <nav class="nav">
+                                                  <a href="#inicio">Inicio</a>a>
+                                                  <a href="#trabajos">Trabajos</a>a>
+                                                  <a href="#servicios">Servicios</a>a>
+                                                  <a href="#equipo">Equipo</a>a>
+                                                  <a href="#contacto">Contacto</a>a>
+                                                  <button class="carrito-btn" onclick="abrirCarrito()">🛒 Carrito (<span id="carrito-count">0</span>span>)</button>button>
+                                </nav>nav>
+                  </div>div>
+        </header>header>
+
+        <section id="inicio" class="hero">
+                  <div class="container">
+                                <div class="hero-content">
+                                                  <h1>María de las Plantas</h1>
+                                                <p>Diseño y Mantenimiento de Jardines</p>
+                                                <p class="subtitle">Transformamos espacios en oasis verdes</p>
+                                                <button class="cta-btn" onclick="document.getElementById('servicios').scrollIntoView({behavior: 'smooth'})">Ver Servicios</button>button>
+                                </div>div>
+                              <div class="hero-image">
+                                              <div class="image-placeholder">🌳 Galería de Proyectos</div>div>
+                              </div>div>
+                  </div>div>
+        </section>section>
+  
+      <section id="trabajos" class="trabajos">
+              <div class="container">
+                          <h2>Nuestros Trabajos</h2>
+                          <div class="galeria">
+                                          <div class="trabajo-card">
+                                                              <div class="trabajo-image">🌸</div>div>
+                                                              <h3>Jardín Zen Residencial</h3>
+                                                              <p>Diseño y armado completo de jardín zen con piedras volcánicas, bambú y fuente de agua.</p>
+                                          </div>div>
+                                          <div class="trabajo-card">
+                                                              <div class="trabajo-image">🪴</div>div>
+                                                              <h3>Terraza con Plantas</h3>
+                                                              <p>Instalación de maceteros colgantes y plantas ornamentales en terraza moderna.</p>
+                                          </div>div>
+                                          <div class="trabajo-card">
+                                                              <div class="trabajo-image">🌺</div>div>
+                                                              <h3>Mantenimiento Mensual</h3>
+                                                              <p>Servicio de mantenimiento continuo para clientes residenciales y comerciales.</p>
+                                          </div>div>
+                                          <div class="trabajo-card">
+                                                              <div class="trabajo-image">🌻</div>div>
+                                                              <h3>Diseño de Huerta</h3>
+                                                              <p>Planificación e instalación de huerta orgánica en casa particular.</p>
+                                          </div>div>
+                          </div>div>
+              </div>div>
+      </section>section>
+  
+      <section id="servicios" class="servicios">
+              <div class="container">
+                          <h2>Servicios y Productos</h2>
+                          <div class="filtros">
+                                          <button class="filtro-btn activo" onclick="filtrarProductos('todos', this)">Todos</button>button>
+                                          <button class="filtro-btn" onclick="filtrarProductos('mantenimiento', this)">Mantenimiento</button>button>
+                                          <button class="filtro-btn" onclick="filtrarProductos('macetas', this)">Macetas</button>button>
+                                          <button class="filtro-btn" onclick="filtrarProductos('asesoria', this)">Asesoría</button>button>
+                          </div>div>
+                          <div class="productos-grid" id="productos-grid"></div>div>
+              </div>div>
+      </section>section>
+  
+      <section id="equipo" class="equipo">
+              <div class="container">
+                          <h2>Nuestro Equipo</h2>
+                          <div class="equipo-grid">
+                                          <div class="miembro-card">
+                                                              <div class="avatar">👩‍🌾</div>div>
+                                                              <h3>María López</h3>
+                                                              <p>Fundadora y Paisajista</p>
+                                                              <p class="bio">15 años de experiencia en diseño de jardines.</p>
+                                          </div>div>
+                                          <div class="miembro-card">
+                                                              <div class="avatar">👨‍🌾</div>div>
+                                                              <h3>Carlos Rodríguez</h3>
+                                                              <p>Especialista en Mantenimiento</p>
+                                                              <p class="bio">Experto en cuidado de plantas y jardines.</p>
+                                          </div>div>
+                                          <div class="miembro-card">
+                                                              <div class="avatar">👩‍💼</div>div>
+                                                              <h3>Ana Martínez</h3>
+                                                              <p>Asesora de Plantas</p>
+                                                              <p class="bio">Asesoría online y diseño de espacios verdes.</p>
+                                          </div>div>
+                          </div>div>
+              </div>div>
+      </section>section>
+  
+      <section class="testimonios">
+              <div class="container">
+                          <h2>Lo que Dicen Nuestros Clientes</h2>
+                          <div class="testimonios-grid">
+                                          <div class="testimonio-card">
+                                                              <p class="texto">"Transformaron completamente mi jardín. Ahora es mi lugar favorito de la casa."</p>
+                                                              <p class="autor">- Carolina Vega, Palermo</p>
+                                                              <div class="rating">⭐⭐⭐⭐⭐</div>div>
+                                          </div>div>
+                                          <div class="testimonio-card">
+                                                              <p class="texto">"María es increíblemente profesional. Su asesoría me ayudó a no matar más mis plantas."</p>
+                                                              <p class="autor">- Juan López, San Isidro</p>
+                                                              <div class="rating">⭐⭐⭐⭐⭐</div>div>
+                                          </div>div>
+                                          <div class="testimonio-card">
+                                                              <p class="texto">"El servicio de mantenimiento es excelente. Mis plantas nunca lucieron mejor."</p>
+                                                              <p class="autor">- Laura González, Belgrano</p>
+                                                              <div class="rating">⭐⭐⭐⭐⭐</div>div>
+                                          </div>div>
+                          </div>div>
+              </div>div>
+      </section>section>
+  
+      <section class="reservas">
+              <div class="container">
+                          <h2>Reserva tu Asesoría</h2>
+                          <div class="reserva-form">
+                                          <input type="text" id="nombre" placeholder="Tu nombre" class="input">
+                                          <input type="email" id="email" placeholder="Tu email" class="input">
+                                          <input type="date" id="fecha" class="input">
+                                          <select id="tipo-servicio" class="input">
+                                                              <option>Selecciona tipo de asesoría</option>
+                                                              <option value="presencial">Presencial - $100</option>
+                                                              <option value="online">Online - $50</option>
+                                          </select>select>
+                                          <button onclick="reservarTurno()" class="cta-btn">Reservar Turno</button>button>
+                          </div>div>
+                          <p class="nota">* Los turnos se confirman después de validar el pago</p>
+                          <div id="turno-confirmado" class="turno-confirmado" style="display:none;">
+                                          <p>✅ Turno reservado. Te enviaremos un email de confirmación.</p>
+                          </div>div>
+              </div>div>
+      </section>section>
+  
+      <section id="carrito" class="carrito-section" style="display:none;">
+              <div class="container">
+                          <h2>Tu Carrito de Compras</h2>
+                          <div id="carrito-items"></div>div>
+                          <div class="carrito-total">
+                                          <h3>Total: $<span id="total">0</span>span></h3>
+                                          <button onclick="pagarCarrito()" class="cta-btn">Proceder al Pago</button>button>
+                                          <button onclick="cerrarCarrito()" class="btn-secundario">Continuar Comprando</button>button>
+                          </div>div>
+              </div>div>
+      </section>section>
+  
+      <section id="contacto" class="contacto">
+              <div class="container">
+                          <h2>Contactanos</h2>
+                          <div class="contacto-info">
+                                          <p>📧 Email: <a href="mailto:felirosano@gmail.com">felirosano@gmail.com</a>a></p>
+                                          <p>📱 WhatsApp: <a href="https://wa.me/5491123456789">+54 9 1123456789</a>a></p>
+                                          <p>📍 Ubicación: Buenos Aires, Argentina</p>
+                          </div>div>
+                          <form class="contacto-form" onsubmit="enviarFormulario(event)">
+                                          <input type="text" placeholder="Tu nombre" required class="input">
+                                          <input type="email" placeholder="Tu email" required class="input">
+                                          <textarea placeholder="Tu mensaje" required class="input"></textarea>
+                                          <button type="submit" class="cta-btn">Enviar Mensaje</button>button>
+                          </form>form>
+              </div>div>
+      </section>section>
+  
+      <footer class="footer">
+              <div class="container">
+                          <p>&copy; 2024 María de las Plantas. Todos los derechos reservados.</p>
+                          <p>Diseño y Mantenimiento de Jardines 🌿</p>
+              </div>div>
+      </footer>footer>
+  
+      <script>
+                const productos = [
+                  { id: 1, nombre: "Mantenimiento Mensual", categoria: "mantenimiento", precio: 150, descripcion: "Servicio de mantenimiento de jardín una vez al mes", emoji: "🌿" },
+                  { id: 2, nombre: "Mantenimiento Quincenal", categoria: "mantenimiento", precio: 250, descripcion: "Mantenimiento cada 15 días para jardines que requieren más cuidado", emoji: "🌱" },
+                  { id: 3, nombre: "Maceta Personalizada Pequeña", categoria: "macetas", precio: 35, descripcion: "Maceta de cerámica personalizada con diseño a elección", emoji: "🪴" },
+                  { id: 4, nombre: "Maceta Personalizada Grande", categoria: "macetas", precio: 60, descripcion: "Maceta grande de cerámica personalizada", emoji: "🏺" },
+                  { id: 5, nombre: "Asesoría Online", categoria: "asesoria", precio: 50, descripcion: "Consulta online sobre cuidado de plantas (1 hora)", emoji: "💻" },
+                  { id: 6, nombre: "Asesoría Presencial", categoria: "asesoria", precio: 100, descripcion: "Visita a domicilio para diseño y consulta (2 horas)", emoji: "👩‍🌾" },
+                  { id: 7, nombre: "Kit de Plantas Premium", categoria: "mantenimiento", precio: 120, descripcion: "Set de 5 plantas seleccionadas con guía de cuidados", emoji: "🌸" },
+                  { id: 8, nombre: "Paquete de Herramientas", categoria: "mantenimiento", precio: 80, descripcion: "Set profesional de herramientas para jardinería", emoji: "🛠️" }
+                          ];
+
+                let carrito = [];
+
+                document.addEventListener('DOMContentLoaded', () => {
+                              renderizarProductos('todos');
+                              cargarCarrito();
+                });
+
+                function renderizarProductos(categoria) {
+                              const grid = document.getElementById('productos-grid');
+                              grid.innerHTML = '';
+                              const productosFiltrados = categoria === 'todos' ? productos : productos.filter(p => p.categoria === categoria);
+                              productosFiltrados.forEach(producto => {
+                                                const card = document.createElement('div');
+                                                card.className = 'producto-card';
+                                                card.innerHTML = `
+                                                                    <div class="producto-imagen">${producto.emoji}</div>
+                                                                                        <div class="producto-info">
+                                                                                                                <h3>${producto.nombre}</h3>
+                                                                                                                                        <p>${producto.descripcion}</p>
+                                                                                                                                                                <div class="producto-precio">$${producto.precio}</div>
+                                                                                                                                                                                        <button class="btn-agregar" onclick="agregarAlCarrito(${producto.id})">Agregar al Carrito</button>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                            `;
+                                                grid.appendChild(card);
+                              });
+                }
+
+                function filtrarProductos(categoria, btn) {
+                              document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
+                              btn.classList.add('activo');
+                              renderizarProductos(categoria);
+                }
+
+                function agregarAlCarrito(productoId) {
+                              const producto = productos.find(p => p.id === productoId);
+                              const itemExistente = carrito.find(item => item.id === productoId);
+                              if (itemExistente) {
+                                                itemExistente.cantidad++;
+                              } else {
+                                                carrito.push({ ...producto, cantidad: 1 });
+                              }
+                              guardarCarrito();
+                              actualizarContadorCarrito();
+                              alert(producto.nombre + ' agregado al carrito!');
+                }
+
+                function eliminarDelCarrito(productoId) {
+                              carrito = carrito.filter(item => item.id !== productoId);
+                              guardarCarrito();
+                              renderizarCarrito();
+                              actualizarContadorCarrito();
+                }
+
+                function renderizarCarrito() {
+                              const carritoDiv = document.getElementById('carrito-items');
+                              if (carrito.length === 0) {
+                                                carritoDiv.innerHTML = '<p>Tu carrito está vacío</p>';
+                                                document.getElementById('total').textContent = '0';
+                                                return;
+                              }
+                              let html = '<h3>Artículos en tu carrito:</h3>';
+                              let total = 0;
+                              carrito.forEach(item => {
+                                                const subtotal = item.precio * item.cantidad;
+                                                total += subtotal;
+                                                html += `
+                                                                    <div class="carrito-item">
+                                                                                            <div>
+                                                                                                                        <strong>${item.nombre}</strong> x ${item.cantidad}
+                                                                                                                                                    <br>
+                                                                                                                                                                                $${item.precio} c/u = $${subtotal}
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                <button class="btn-eliminar" onclick="eliminarDelCarrito(${item.id})">Eliminar</button>
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                    `;
+                              });
+                              carritoDiv.innerHTML = html;
+                              document.getElementById('total').textContent = total;
+                }
+
+                function abrirCarrito() {
+                              renderizarCarrito();
+                              document.querySelector('.carrito-section').style.display = 'block';
+                              document.getElementById('carrito').scrollIntoView({ behavior: 'smooth' });
+                }
+
+                function cerrarCarrito() {
+                              document.querySelector('.carrito-section').style.display = 'none';
+                              document.getElementById('inicio').scrollIntoView({ behavior: 'smooth' });
+                }
+
+                function actualizarContadorCarrito() {
+                              const count = carrito.reduce((total, item) => total + item.cantidad, 0);
+                              document.getElementById('carrito-count').textContent = count;
+                }
+
+                function pagarCarrito() {
+                              if (carrito.length === 0) {
+                                                alert('Tu carrito está vacío');
+                                                return;
+                              }
+                              const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+                              alert('Total a pagar: $' + total + '\n\nPara completar el pago, por favor contactanos a felirosano@gmail.com');
+                }
+
+                function reservarTurno() {
+                              const nombre = document.getElementById('nombre').value;
+                              const email = document.getElementById('email').value;
+                              const fecha = document.getElementById('fecha').value;
+                              const tipo = document.getElementById('tipo-servicio').value;
+                              if (!nombre || !email || !fecha || tipo === 'Selecciona tipo de asesoría') {
+                                                alert('Por favor completa todos los campos');
+                                                return;
+                              }
+                              document.getElementById('turno-confirmado').style.display = 'block';
+                              document.getElementById('nombre').value = '';
+                              document.getElementById('email').value = '';
+                              document.getElementById('fecha').value = '';
+                              document.getElementById('tipo-servicio').value = 'Selecciona tipo de asesoría';
+                              setTimeout(() => {
+                                                document.getElementById('turno-confirmado').style.display = 'none';
+                              }, 5000);
+                }
+
+                function enviarFormulario(event) {
+                              event.preventDefault();
+                              alert('¡Gracias por tu mensaje! Nos pondremos en contacto pronto.');
+                              event.target.reset();
+                }
+
+                function guardarCarrito() {
+                              localStorage.setItem('carrito', JSON.stringify(carrito));
+                }
+
+                function cargarCarrito() {
+                              const carritoGuardado = localStorage.getItem('carrito');
+                              if (carritoGuardado) {
+                                                carrito = JSON.parse(carritoGuardado);
+                                                actualizarContadorCarrito();
+                              }
+                }
+      </script>
+  </body>
+</html>html>
+      </script></option></p></p></h1>
+  </body>
+      </style></title>
+  </head>
